@@ -23,6 +23,8 @@ def index():
     print(image_url)
     # TODO: white-list domain names for security reasons
     image_response = requests.get(image_url)
+    n = random.randint(0, 10)
+
     image = Image.open(io.BytesIO(image_response.content))
     flipped_image = random_augmentation(image)
     # TODO: support multi-processing: do not save to the same file
