@@ -45,6 +45,6 @@ if __name__ == "__main__":
     # TODO: expose parameters (port, seed, etc)
     random.seed(42)
     STATIC_DIR.mkdir(exist_ok=True)
-    
+
     # Run the server
     app.run(host="0.0.0.0", port=8080, debug=True)

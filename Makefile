@@ -1,3 +1,5 @@
+LINT_DIRS = mymodel flask_augmentations
+
 FLASK_APP ?= flask_augmentations.app:app
 
 COMMIT ?=
@@ -15,8 +17,13 @@ setup:
 	python -m pip install -r requirements-dev.txt
 
 format:
-	black mymodel/ flask_augmentations
-	isort mymodel/ flask_augmentations
+	black $(LINT_DIRS)
+	isort $(LINT_DIRS)
+
+lint:
+	flake8 $(LINT_DIRS)
+	isort -c $(LINT_DIRS)
+	mypy $(LINT_DIRS)
 
 
 serve:

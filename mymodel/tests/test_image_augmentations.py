@@ -1,4 +1,3 @@
-import io
 from collections import namedtuple
 from typing import Dict
 
@@ -6,10 +5,8 @@ import albumentations as A
 import numpy as np
 import PIL.Image
 import pytest
-from PIL import Image
 
 from mymodel.image_augmentations import (
-    DEFAULT_TRANSFORMS,
     apply_augmentation,
     apply_random_augmentations,
     create_transform,
@@ -18,13 +15,13 @@ from mymodel.image_augmentations import (
 )
 
 
-_Transform = namedtuple("Transform", "name, typ, p, kwargs")
+_Transform = namedtuple("_Transform", "name, typ, p, kwargs")
 
 
 @pytest.fixture()
-def image() -> Image:
+def image() -> PIL.Image.Image:
     img_np = np.ones((128, 128, 3), dtype=np.uint8)
-    img = Image.fromarray(img_np)
+    img = PIL.Image.fromarray(img_np)
     return img
 
 
@@ -58,7 +55,7 @@ def image() -> Image:
         ),
     ],
 )
-def test_create_transform__ok(name: str, typ: "Type", p: float, kwargs: Dict):
+def test_create_transform__ok(name: str, typ, p: float, kwargs: Dict):
     """
     This test checks that the function `create_transform` actually
     creates a proper augmentation transform and that the parameters
@@ -89,27 +86,27 @@ def test_create_transform__invalid_p_too_small():
 
 
 def get_random_transform_classes__ok():
-    transforms = get_random_transform_classes(n_max=4, p=0.75)
-    assert len(names) <= 4
-    assert all(isinstance(t, A.BaseTransform) for t in transforms)
+    classes = get_random_transform_classes(n_max=4)
+    assert len(classes) <= 4
+    assert all(isinstance(t, A.BaseTransform) for t in classes)
 
 
-def test_apply_augmentation__ok_shape(image: Image):
+def test_apply_augmentation__ok_shape(image: PIL.Image.Image):
     t = A.Compose([create_transform("GaussNoise", p=1.0)])
     image2 = apply_augmentation(image, t)
     assert isinstance(image2, PIL.Image.Image)
     assert image2.size == image.size
 
 
-def test_apply_random_augmentations__ok_shape(image: Image):
+def test_apply_random_augmentations__ok_shape(image: PIL.Image.Image):
     N = 4
-    image2, transform = apply_random_augmentations(image, n=N)
+    image2, info = apply_random_augmentations(image, n=N)
 
     assert isinstance(image2, PIL.Image.Image)
     assert image2.size == image.size
 
-    assert isinstance(transform, A.Compose)
-    assert len(transform.get_dict_with_id()["transforms"]) <= N
+    assert len(info) == N
+    assert all(t["name"] for t in info)
 
 
 def test_get_composite_transform_info__ok():
