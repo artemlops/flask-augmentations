@@ -70,4 +70,4 @@ jobs:
         push: true
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache-new
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/flask_augmentations:${GITHUB_SHA::8}
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/flask_augmentations:${{ github.sha }}
