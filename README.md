@@ -23,4 +23,4 @@ http://0.0.0.0:8000/?url=https://imgs.xkcd.com/comics/bad_code.png
 ## Solution
 Please find instructions in the sub-projects: [mymodel](mymodel) and [flask_augmentations](flask_augmentations).
 
-![screenshot](flask_augmentations/screenshots/screenshot1.png)
+![screenshot](screenshots/screenshot1.png)

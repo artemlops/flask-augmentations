@@ -2,7 +2,7 @@
 
 This package is supposed to contain the ML model code, which includes image augmentations.
 
-![screenshot](screenshots/screenshot2.png)
+![screenshot](../screenshots/screenshot2.png)
 
 ## Features
 - The package is organized as a proper Python package installable via `pip` (so that no hacks like `sys.append` or `export PYTHONPATH` are needed).
