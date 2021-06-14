@@ -1,5 +1,5 @@
 from PIL import Image
-from typing import List
+from typing import List, Dict, Any, Tuple
 import numpy as np
 import albumentations as A
 import logging
@@ -8,8 +8,24 @@ import logging
 # Note: albumentations have made a similar API but via Streamlit
 # not via Flask: https://albumentations-demo.herokuapp.com/
 
+from collections import namedtuple
+
+
+TransformRequest = namedtuple("TransformRequest", "name, p, kwargs", defaults=[{}])
+
+DEFAULT_TRANSFORMS = (
+    TransformRequest("ShiftScaleRotate", 0.75),
+    TransformRequest("HorizontalFlip", 0.3),
+    TransformRequest("VerticalFlip", 0.3),
+    TransformRequest("HueSaturationValue", 0.5),
+    TransformRequest("GaussNoise", 0.5),
+    TransformRequest("CoarseDropout", 0.3),
+)
+
 
 def create_transform(name: str, p: float, **kwargs):
+    if not 0.0 <= p <= 1.0:
+        raise ValueError(f"Invalid argument p={p}: must be a valid probability")
     if name == "Rotate":
         return A.Rotate(p=p, **kwargs)
     if name == "ShiftScaleRotate":
@@ -64,30 +80,16 @@ def create_transform(name: str, p: float, **kwargs):
     raise ValueError(f"Invalid transform name: '{name}'")
 
 
-# def get_transforms(probs: List[float]) -> List[A.BasicTransform]:
-#     # TODO: expose more parameters
-#     err = "Invalid argument 'probs'"
-#     if not probs:
-#         raise ValueError(f"{err}: expect at least one item")
-#     max_len = len(GET_TRANSFORM)
+def get_composite_transform(
+    requests: List[TransformRequest] = DEFAULT_TRANSFORMS,
+) -> A.Compose:
+    # TODO: expose more parameters
+    err = "Invalid argument 'requests'"
+    if not requests:
+        raise ValueError(f"Invalid argument 'requests': expect at least one item")
+    transforms = [create_transform(req.name, req.p, **req.kwargs) for req in requests]
+    return A.Compose(transforms, p=1.0)
 
-#     if len(probs) >= max_len:
-#         raise ValueError(f"{err}: expect at most {max_len} items")
-#     if not all(0.0 <= p <= 1.0 for p in probs):
-#         raise ValueError(f"{err}: all items must be valid probabilities")
-
-#     diff_len = max_len - len(probs)
-#     all_probs = probs
-#     if diff_len > 0:
-#         all_probs += [0.0] * diff_len
-
-#     transforms = [
-#         GET_TRANSFORM[i](p)
-#         for i, p in enumerate(all_probs)
-#     ]
-#     return transforms
-
-#     # return A.Compose(transforms, p=1.0, always_apply=True)
 
 # def random_augmentation(image: Image) -> Image:
 #     transform = get_transform()
