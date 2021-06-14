@@ -4,6 +4,9 @@
     <title>Index</title>
 </head>
 <body>
+    {% for item in transforms %}
+        <li><b>{{ item.name }}</b>: {{item.p}}</li>
+    {% endfor %}
     <img src="{{ url_for('static', filename='augmented_image.jpg') }}" alt="User Image">
 </body>
 </html>
