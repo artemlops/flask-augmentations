@@ -10,7 +10,7 @@ setup(
     name='flask_augmentations',
     version='0.0.1',
     package_dir = {'': 'src'},
-    packages=find_packages(),
+    packages=find_packages('src'),
     include_package_data=True,
     zip_safe=False,
     install_requires=REQUIREMENTS_BASE,

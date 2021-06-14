@@ -1,4 +1,5 @@
 from PIL import Image
+
 import random
 
 def random_augmentation(image: Image):

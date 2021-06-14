@@ -1,11 +1,12 @@
 import io
 import requests
+import random
 from flask import Flask, request, render_template
 from PIL import Image
 from pathlib import Path
 
 # Imports for prediction
-from .image_augmentations import random_augmentation
+from mymodel.image_augmentations import random_augmentation
 
 
 CURRENT_DIR = Path(__file__).parent
@@ -29,5 +30,6 @@ def index():
 
 if __name__ == '__main__':
     # Run the server
+    random.seed(42)
     app.run(host='0.0.0.0', port=8000, debug=True)
 
