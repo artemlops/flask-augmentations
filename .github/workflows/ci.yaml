@@ -26,7 +26,7 @@ jobs:
     - name: Cache pip
       uses: actions/cache@v2.1.5
       with:
-        key: pip-lint-${{ hashFiles('setup.py') }}-${{ hashFiles('requirements/*.txt') }}
+        key: pip-lint-${{ hashFiles('mymodel/setup.py') }}-${{ hashFiles('flask_augmentations/setup.py') }}-${{ hashFiles('requirements-*.txt') }}
         path: ~/.cache/pip
         restore-keys: |
           pip-lint-
