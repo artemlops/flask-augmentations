@@ -8,7 +8,8 @@ IMAGE_LOCAL_FULL = $(IMAGE_NAME):$(IMAGE_TAG)
 IMAGE_REMOTE_FULL = $(IMAGE_REMOTE_PREFIX)/$(IMAGE_LOCAL_FULL)
 
 setup:
-	pip install -r requirements/dev.txt
+	pip install -U pip setuptools wheel
+	pip install -r requirements-dev.txt
 
 serve:
 	FLASK_APP=$(FLASK_APP) flask run -p 8080

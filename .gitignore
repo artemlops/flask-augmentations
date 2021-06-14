@@ -1,5 +1,5 @@
 /.git/
 /venv/
-/src/flask_augmentations/static/*.jpg
+/flask_augmentations/static/*.jpg
 *.egg-info
 __pycache__
