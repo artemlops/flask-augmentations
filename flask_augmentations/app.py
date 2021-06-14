@@ -8,9 +8,7 @@ from pathlib import Path
 # Imports for prediction
 from mymodel.image_augmentations import random_augmentation
 
-
 CURRENT_DIR = Path(__file__).parent
-
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
