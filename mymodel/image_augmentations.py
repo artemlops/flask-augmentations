@@ -54,7 +54,7 @@ def create_transform(name: str, p: float, **kwargs: Any):
     for transform, kw in TRANSFORMS.items():
         t_name = _get_transform_name(transform)
         if t_name == name:
-            all_kwargs: Dict[str, Any] = {**kw, **kwargs}
+            all_kwargs: Dict = {**kw, **kwargs}
             return transform(p=p, **all_kwargs)
 
     raise ValueError(f"Invalid transform name: '{name}'")
@@ -82,7 +82,7 @@ def apply_augmentation(
 
 def apply_random_augmentations(
     image: PIL.Image.Image, *, n: int = DEFAULT_N_TRANSFORMS, p: float = 0.75
-) -> Tuple[PIL.Image.Image, List[Dict[str, Any]]]:
+) -> Tuple[PIL.Image.Image, List[Dict]]:
     transform = A.Compose(
         [create_transform(n, p) for n in get_random_transform_classes(n=n)]
     )
@@ -91,7 +91,7 @@ def apply_random_augmentations(
     return result, info
 
 
-def get_composite_transform_info(transform: A.Compose) -> List[Dict[str, Any]]:
+def get_composite_transform_info(transform: A.Compose) -> List[Dict]:
     children = transform.get_dict_with_id()["transforms"]
     result = []
     for c in children:
