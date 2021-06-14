@@ -4,7 +4,7 @@ This package contains a Flask application to render image augmentations.
 
 **Warning**: It is highly insecure and is NOT recommended to run in production.
 
-![screenshot](screenshot.png)
+![screenshot](screenshots/screenshot1.png)
 
 ## Features
 - The package is organized as a proper Python package installable via `pip` (so that no hacks like `sys.append` or `export PYTHONPATH` are needed).
@@ -30,9 +30,12 @@ This package contains a Flask application to render image augmentations.
 7. To run Flask a docker: `make docker_serve COMMIT=a11f7e6d` (7-digit of a commit SHA).
 
 Once running a Flask app, test it:
-- http://127.0.0.1:8080/?url=https://cdn.pixabay.com/photo/2021/04/29/11/40/big-ben-6216420_960_720.jpg
-- http://127.0.0.1:8080/?url=https://imgs.xkcd.com/comics/bad_code.png
+- http://0.0.0.0:8080/?url=https://cdn.pixabay.com/photo/2021/04/29/11/40/big-ben-6216420_960_720.jpg
+- http://0.0.0.0:8080/?url=https://cdn.pixabay.com/photo/2021/06/07/17/12/plant-6318497_960_720.jpg
+- http://0.0.0.0:8080/?url=https://cdn.pixabay.com/photo/2021/06/01/06/24/old-town-6300696_960_720.jpg
+- http://0.0.0.0:8080/?url=https://cdn.pixabay.com/photo/2021/06/07/14/21/mountains-6318080_960_720.jpg
 
 
-## Solution
-Please find instructions in the sub-projects: [flask_augmentations](flask_augmentations) and [mymodel](mymodel).
+# Known issues
+- Security issues, UX issues -- see `TODO`s.
+- Some transforms handle black-white images incorrectly, thus throwing 500 error. Now Flask app works properly only for RGB images (see examples).

@@ -18,3 +18,9 @@ To send an image and get the app to work open a link as follows:
 http://0.0.0.0:8000/?url=<image_url>
 for example:
 http://0.0.0.0:8000/?url=https://imgs.xkcd.com/comics/bad_code.png
+
+
+## Solution
+Please find instructions in the sub-projects: [flask_augmentations](flask_augmentations) and [mymodel](mymodel).
+
+![screenshot](screenshots/screenshot2.png)
