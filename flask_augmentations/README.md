@@ -4,7 +4,7 @@ This package contains a Flask application to render image augmentations.
 
 **Warning**: It is highly insecure and is NOT recommended to run in production.
 
-![screenshot](screenshots/screenshot1.png)
+![screenshot](screenshots/screenshot3.png)
 
 ## Features
 - The package is organized as a proper Python package installable via `pip` (so that no hacks like `sys.append` or `export PYTHONPATH` are needed).
