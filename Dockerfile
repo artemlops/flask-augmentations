@@ -1,4 +1,4 @@
-FROM python:3.8
+FROM amd64/python:3.8
 WORKDIR /workdir
 
 ENV FLASK_APP=flask_augmentations.app:app
