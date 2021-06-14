@@ -9,4 +9,4 @@ This package is supposed to contain the ML model code, which includes image augm
   - method `apply_augmentation` uses inputs/outputs of the level of `PIL.Image` and `albumentations`, which makes it understandable for regular data scientists,
   - method `apply_random_augmentations` is what the Flask server will be used: it accepts a PIL image ans some configurations and returns the transformed image and meta-info as a `Dict`.
 - All methods in this package are covered via unit tests in [test_image_augmentations.py](test_image_augmentations.py) (they're pretty dumb because we don't want to test the logic of `albumentations` transforms, we just want to make sure that the methods work).
-- 
+- To improve code quality, we implemented linters + auto-formatters (`black`, `flake`, `isort`) and type checker (`mypy`).
