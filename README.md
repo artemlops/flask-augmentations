@@ -10,7 +10,7 @@ To complete the flask app you will need to do the following:
 4. Add a image augmentation function image_augmentations.py
 5. Add a test for your function
 6. Improve the repo/python code/deployment in some imaginative way to show-off... Highlight this in the readme.
-7. Send the recycleye team the link to your code.
+7. Send the team the link to your code.
 
 Put the instructions here on how to set up/run the docker file. It should port-forward the application to run on http://127.0.0.1:8000/.
 
