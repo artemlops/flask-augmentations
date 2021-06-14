@@ -35,6 +35,14 @@ jobs:
       run: |
         make setup
 
+    - name: Run linter
+      run: |
+        make lint
+
+    - name: Run unit tests
+      run: |
+        make test
+
 
   docker_push:
     name: Build and push docker image
@@ -71,7 +79,7 @@ jobs:
           GITHUB_SHA=$(cat $GITHUB_EVENT_PATH | jq -r .pull_request.head.sha)
         fi
         export IMAGE_NAME=$(make print.IMAGE_NAME)
-        export IMAGE_TAG=${GITHUB_SHA::8}
+        export IMAGE_TAG=${GITHUB_SHA::7}
         test "${IMAGE_NAME}"
         test "${IMAGE_TAG}"
         echo "IMAGE_NAME=${IMAGE_NAME}" >> $GITHUB_ENV
