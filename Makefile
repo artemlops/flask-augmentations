@@ -23,7 +23,7 @@ format:
 lint:
 	flake8 $(LINT_DIRS)
 	isort -c $(LINT_DIRS)
-	mypy --install-types $(LINT_DIRS)
+	mypy $(LINT_DIRS)
 
 
 serve:
