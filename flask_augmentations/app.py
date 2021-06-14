@@ -11,6 +11,8 @@ from mymodel.image_augmentations import apply_random_augmentations
 
 
 CURRENT_DIR = Path(__file__).parent
+STATIC_DIR = CURRENT_DIR / "static"
+
 
 app = Flask(__name__)
 app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 0
@@ -35,12 +37,14 @@ def index():
     logging.debug(f"Applied transforms: {info}")
 
     # TODO: support multi-processing: do not save to the same file
-    flipped_image.save(CURRENT_DIR / "static/augmented_image.jpg")
+    flipped_image.save(STATIC_DIR / "augmented_image.jpg")
     return render_template("index.html", **context)
 
 
 if __name__ == "__main__":
     # TODO: expose parameters (port, seed, etc)
     random.seed(42)
+    STATIC_DIR.mkdir(exist_ok=True)
+    
     # Run the server
     app.run(host="0.0.0.0", port=8080, debug=True)
