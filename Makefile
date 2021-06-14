@@ -2,7 +2,7 @@ FLASK_APP ?= flask_augmentations.app:app
 
 IMAGE_REMOTE_PREFIX ?= artemlops
 IMAGE_NAME ?= flask_augmentations
-IMAGE_TAG ?= debug-0.0.1
+IMAGE_TAG ?=
 
 IMAGE_LOCAL_FULL = $(IMAGE_NAME):$(IMAGE_TAG)
 IMAGE_REMOTE_FULL = $(IMAGE_REMOTE_PREFIX)/$(IMAGE_LOCAL_FULL)
@@ -34,17 +34,28 @@ docker_push:
 	docker tag $(IMAGE_LOCAL_FULL) $(IMAGE_REMOTE_FULL)
 	docker push $(IMAGE_REMOTE_FULL)
 
+docker_serve: require.IMAGE_TAG
+	docker run -p 8080:8080 --name flask_augmentations $(IMAGE_REMOTE_FULL)
+
 
 .PHONY: \
 	setup \
 	serve \
 	docker_build \
-	docker_push
+	docker_push \
+	docker_serve
 
 # utils
 ##
 
 # This target prints provided variable value,
 # for example: 'make print.IMAGE_NAME'
+.SILENT: print.%
 print.%:
 	@echo $($*)
+
+
+# This target allows us to explicitly require some env var to be set.
+.SILENT: require.%
+require.%:
+	$(if $(value $(*)),,$(error Missing required argument $(*)))

@@ -4,10 +4,12 @@ WORKDIR /workdir
 ENV FLASK_APP=flask_augmentations.app:app
 ENV FLASK_RUN_HOST=0.0.0.0
 
-COPY requirements requirements
-COPY src src
-COPY setup.py setup.py
-RUN pip install -U pip && pip install --no-cache-dir .
+COPY flask_augmentations ./flask_augmentations
+COPY mymodel ./mymodel
+
+RUN pip install -U pip \
+    && pip install --no-cache-dir ./mymodel \
+    && pip install --no-cache-dir ./flask_augmentations
 
 EXPOSE 8080
 

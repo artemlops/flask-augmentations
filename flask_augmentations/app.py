@@ -43,4 +43,4 @@ if __name__ == "__main__":
     # TODO: expose parameters (port, seed, etc)
     random.seed(42)
     # Run the server
-    app.run(host="0.0.0.0", port=8000, debug=True)
+    app.run(host="0.0.0.0", port=8080, debug=True)
