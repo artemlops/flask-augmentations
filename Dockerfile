@@ -12,4 +12,4 @@ RUN pip install -U pip \
     && pip install --no-cache-dir ./flask_augmentations
 
 EXPOSE 8080
-CMD ["flask", "run", "-", "8080"]
+CMD ["flask", "run", "-p", "8080"]

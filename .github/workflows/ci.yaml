@@ -66,11 +66,10 @@ jobs:
     - name: Retrieve image name
       run: |
         set +x
-        
+        # Fix commit SHA for PRs
         if [ "$GITHUB_EVENT_NAME" == "pull_request" ]; then
           GITHUB_SHA=$(cat $GITHUB_EVENT_PATH | jq -r .pull_request.head.sha)
         fi
-
         export IMAGE_NAME=$(make print.IMAGE_NAME)
         export IMAGE_TAG=${GITHUB_SHA::8}
         test "${IMAGE_NAME}"
