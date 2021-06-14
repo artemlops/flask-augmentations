@@ -1,16 +1,15 @@
-from PIL import Image
-
-from typing import List, Dict, Any, Tuple
-import random
-import numpy as np
-import albumentations as A
 import logging
+import random
+from collections import namedtuple
+from typing import Any, Dict, List, Tuple
+
+import albumentations as A
+import numpy as np
+from PIL import Image
 
 
 # Note: albumentations have made a similar API but via Streamlit
 # not via Flask: https://albumentations-demo.herokuapp.com/
-
-from collections import namedtuple
 
 
 # TransformRequest = namedtuple("TransformRequest", "name, p, kwargs", defaults=[{}])

@@ -1,19 +1,21 @@
-import albumentations as A
-from typing import Dict
-from PIL import Image
-import PIL.Image
 import io
+from collections import namedtuple
+from typing import Dict
+
+import albumentations as A
 import numpy as np
+import PIL.Image
+import pytest
+from PIL import Image
+
 from mymodel.image_augmentations import (
-    create_transform,
     DEFAULT_TRANSFORMS,
-    get_random_transform_classes,
-    get_composite_transform_info,
     apply_augmentation,
     apply_random_augmentations,
+    create_transform,
+    get_composite_transform_info,
+    get_random_transform_classes,
 )
-import pytest
-from collections import namedtuple
 
 
 _Transform = namedtuple("Transform", "name, typ, p, kwargs")

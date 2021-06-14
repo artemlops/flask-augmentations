@@ -11,6 +11,10 @@ setup:
 	python -m pip install -U pip setuptools wheel
 	python -m pip install -r requirements-dev.txt
 
+format:
+	black mymodel/ flask_augmentations
+	isort mymodel/ flask_augmentations
+
 serve:
 	FLASK_APP=$(FLASK_APP) flask run -p 8080
 

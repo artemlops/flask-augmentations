@@ -1,4 +1,5 @@
-from setuptools import setup, find_packages
+from setuptools import find_packages, setup
+
 
 REQUIREMENTS = [
     "Flask>=2.0.0",
@@ -7,8 +8,8 @@ REQUIREMENTS = [
 ]
 
 setup(
-    name='flask_augmentations',
-    version='0.0.1',
+    name="flask_augmentations",
+    version="0.0.1",
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
