@@ -5,3 +5,4 @@ isort>=5.8.0
 black>=21.6b0
 flake8>=3.9.2
 mypy>=0.902
+types-requests  # required by mypy
