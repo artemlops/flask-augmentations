@@ -43,6 +43,9 @@ jobs:
     timeout-minutes: 5
     steps:
 
+    - name: Checkout commit
+      uses: actions/checkout@v2
+
     - name: Cache Docker layers
       uses: actions/cache@v2
       with:
@@ -61,6 +64,16 @@ jobs:
       id: buildx
       uses: docker/setup-buildx-action@v1
 
+    - name: Retrieve image name
+      run: |
+        set +x
+        export IMAGE_NAME=$(make print.IMAGE_NAME)
+        export IMAGE_TAG=${GITHUB_SHA::8}
+        test "${IMAGE_NAME}"
+        test "${IMAGE_TAG}"
+        echo "IMAGE_NAME=${IMAGE_NAME}" >> $GITHUB_ENV
+        echo "IMAGE_TAG=${IMAGE_TAG}" >> $GITHUB_ENV
+
     - name: Build and push
       id: docker_build
       uses: docker/build-push-action@v2
@@ -70,4 +83,4 @@ jobs:
         push: true
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache-new
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/flask_augmentations:${{ github.sha }}
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
