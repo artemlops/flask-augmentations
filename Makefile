@@ -50,6 +50,9 @@ docker_push:
 docker_serve: require.COMMIT
 	docker run --rm -d --name flask_augmentations -p 8080:8080 $(IMAGE_REMOTE_FULL)
 
+docker_kill:
+	docker kill flask_augmentations
+
 
 .PHONY: \
 	setup \

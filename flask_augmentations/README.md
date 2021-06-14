@@ -27,7 +27,8 @@ This package contains a Flask application to render image augmentations.
 4. Once changed the code, auto-format it: `make format`
 5. To build and push docker image: `make docker_build && make docker_push`
 6. To run Flask locally: `make serve`
-7. To run Flask a docker: `make docker_serve COMMIT=a11f7e6d` (7-digit of a commit SHA).
+7. To run Flask in docker: `make docker_serve COMMIT=a11f7e6d` (7-digit of a commit SHA).
+8. To stop the Flask in docker: `make docker_kill`
 
 Once running a Flask app, test it:
 - http://0.0.0.0:8080/?url=https://cdn.pixabay.com/photo/2021/04/29/11/40/big-ben-6216420_960_720.jpg
@@ -36,6 +37,14 @@ Once running a Flask app, test it:
 - http://0.0.0.0:8080/?url=https://cdn.pixabay.com/photo/2021/06/07/14/21/mountains-6318080_960_720.jpg
 
 
-# Known issues
-- Security issues, UX issues -- see `TODO`s.
+## Known issues
 - Some transforms handle black-white images incorrectly, thus throwing 500 error. Now Flask app works properly only for RGB images (see examples).
+- Support multi-processing: now, only 1 user can work with the app at a single moment of time.
+- Security: white-list domain names so that the server doesn't arbitrary requests to any host on the Internet,
+
+
+## Ideas of improvements
+- Better test coverage (integration tests, etc).
+- Automatic deployment, if needed.
+- Better UI (for example, allow the user to insert `url` into a text frame).
+- Better flexibility: expose more start-up parameters (host, port, `n` for maximum number of transformations, etc).
