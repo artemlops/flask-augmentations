@@ -1,6 +1,11 @@
 # Flask-server to explore augmentations
 
+This package contains a Flask application to render image augmentations.
 
+**Warning**: It is highly insecure and is NOT recommended to run in production.
+
+- The package is organized as a proper Python package installable via `pip` (so that no hacks like `sys.append` or `export PYTHONPATH` are needed).
+- 
 
 
 
