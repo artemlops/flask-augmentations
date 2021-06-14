@@ -100,4 +100,20 @@ def apply_random_augmentations(
         [create_transform(n, p) for n in get_random_transform_classes(n=n, p=p)]
     )
     result = apply_augmentation(image, transform)
-    return result, transform
+    info = get_composite_transform_info(transform)
+    return result, info
+
+
+def get_composite_transform_info(transform: A.Compose) -> Dict:
+    d = transform.get_dict_with_id()
+    children = transform.get_dict_with_id()["transforms"]
+    result = []
+    for c in children:
+        c.pop("id")
+        result.append(
+            {
+                "name": c.pop("__class_fullname__"),
+                **c,
+            }
+        )
+    return result

@@ -8,6 +8,7 @@ from mymodel.image_augmentations import (
     create_transform,
     DEFAULT_TRANSFORMS,
     get_random_transform_classes,
+    get_composite_transform_info,
     apply_augmentation,
     apply_random_augmentations,
 )
@@ -101,8 +102,24 @@ def test_apply_augmentation__ok_shape(image: Image):
 def test_apply_random_augmentations__ok_shape(image: Image):
     N = 4
     image2, transform = apply_random_augmentations(image, n=N)
+
     assert isinstance(image2, PIL.Image.Image)
     assert image2.size == image.size
 
     assert isinstance(transform, A.Compose)
     assert len(transform.get_dict_with_id()["transforms"]) <= N
+
+
+def test_get_composite_transform_info__ok():
+    t = A.Compose([create_transform("GaussNoise", p=1.0)])
+    info = get_composite_transform_info(t)
+    assert info == [
+        {
+            "name": "GaussNoise",
+            "always_apply": False,
+            "p": 1.0,
+            "var_limit": (50, 150),
+            "per_channel": True,
+            "mean": 0,
+        }
+    ], info
