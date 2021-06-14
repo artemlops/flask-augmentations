@@ -76,12 +76,12 @@ def test_create_transform__invalid_name():
 
 
 def test_create_transform__invalid_p_too_big():
-    with pytest.raises(ValueError, match="must be a valid probability"):
+    with pytest.raises(ValueError, match="must be a valid prob"):
         create_transform("Rotate", p=100500)
 
 
 def test_create_transform__invalid_p_too_small():
-    with pytest.raises(ValueError, match="must be a valid probability"):
+    with pytest.raises(ValueError, match="must be a valid prob"):
         create_transform("Rotate", p=-1)
 
 

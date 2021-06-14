@@ -2,6 +2,7 @@
 
 This package is supposed to contain the ML model code, which includes image augmentations.
 
+## Features
 - The package is organized as a proper Python package installable via `pip` (so that no hacks like `sys.append` or `export PYTHONPATH` are needed).
 - Augmentations defined in [image_augmentations.py](image_augmentations.py) in a *testible* and *extensible* way:
   - to support a new augmentation from `albumentations`, just add it to `TRANSFORMS` and method `create_transform` will automatically plug it in,
